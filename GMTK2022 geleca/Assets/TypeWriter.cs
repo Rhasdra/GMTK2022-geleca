@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class DialogueBox : MonoBehaviour, IDialogueBox
+public class TypeWriter : MonoBehaviour, IDialogueBox
 {
-    TextMeshProUGUI textBox;
+    [SerializeField] TextMeshProUGUI textBox;
     public bool isTyping = false;
 
     private string currentText = string.Empty;
