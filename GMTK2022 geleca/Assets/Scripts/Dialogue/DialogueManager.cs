@@ -6,14 +6,16 @@ using UnityEngine.Events;
 
 public class DialogueManager : MonoBehaviour, IInteractable
 {
-    public float typingSpeed = 50;
+    public float typingSpeed = 10;   
+    [SerializeField] TypeWriter dialogueBox;
+    [SerializeField] SpriteRenderer sprite;
     [SerializeField] DialogueObject[] dialogueObject;
+
     [SerializeField] int objectIndex = 0;
     [SerializeField] int sentenceIndex = 0;
     [SerializeField] bool isFirstText = true;
     [SerializeField] bool isLastText = false;
 
-    IDialogueBox dialogueBox;
 
     public UnityEvent DialogueStart;
     public UnityEvent EndOfDialogues;
@@ -21,13 +23,14 @@ public class DialogueManager : MonoBehaviour, IInteractable
     private void Awake() 
     {
         typingSpeed = (typingSpeed / 1000);
-        dialogueBox = GetComponent<IDialogueBox>();
     }
 
     private void NextDialogue() 
     {
         TypeDialogue(dialogueObject[objectIndex], typingSpeed);
         DialogueStart.Invoke();
+
+        sprite.sprite = dialogueObject[objectIndex].Expression;
     }
 
     private void TypeDialogue(DialogueObject dialogueObject, float typingSpeed)
@@ -37,11 +40,9 @@ public class DialogueManager : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        TypeWriter current = GetComponent<TypeWriter>();
-
-        if (current.isTyping)
+        if (dialogueBox.isTyping)
         {
-            current.RushText();
+            dialogueBox.RushText();
             return;
         }
         else

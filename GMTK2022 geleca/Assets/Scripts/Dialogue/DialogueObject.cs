@@ -4,6 +4,8 @@ using UnityEngine;
 public class DialogueObject : ScriptableObject
 {
     [SerializeField] [TextArea] private string[] sentence;
-
     public string[] Sentence => sentence;
+
+    [SerializeField] private Sprite sprite;
+    public Sprite Expression => sprite;
 }
