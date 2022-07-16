@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public class TypeWriter : MonoBehaviour, IDialogueBox
 {
@@ -10,6 +11,8 @@ public class TypeWriter : MonoBehaviour, IDialogueBox
 
     private string currentText = string.Empty;
     private IEnumerator coroutine;
+
+    public UnityEvent LetterDisplay;
 
     private void Awake() 
     {
@@ -35,6 +38,12 @@ public class TypeWriter : MonoBehaviour, IDialogueBox
             if(i < textToType.Length -1)
             {
                 i++;
+                
+                if(letter != ' ')
+                {
+                LetterDisplay.Invoke();
+                }
+
                 yield return new WaitForSeconds(typingSpeed);
             }
             else
