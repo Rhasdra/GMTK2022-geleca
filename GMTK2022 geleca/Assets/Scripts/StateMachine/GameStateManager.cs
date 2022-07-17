@@ -4,8 +4,5 @@ using UnityEngine;
 
 public class GameStateManager : StateMachine
 {
-    private void Start() 
-    {
-        currentState = states[1];
-    }
+
 }

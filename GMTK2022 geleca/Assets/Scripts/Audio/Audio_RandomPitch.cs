@@ -5,9 +5,9 @@ using UnityEngine;
 public class Audio_RandomPitch : MonoBehaviour
 {
     AudioSource audioSource;
-    public float cooldown = 0.2f;
-    public float pitchMin = 2;
-    public float pitchMax = 3;
+    public float cooldown = 0.07f;
+    public float pitchMin = 5;
+    public float pitchMax = 7;
     float lastPlay;
 
     private void Awake() 

@@ -9,6 +9,7 @@ public class DialogueManager : MonoBehaviour, IInteractable
     public float typingSpeed = 10;   
     [SerializeField] TypeWriter dialogueBox;
     [SerializeField] SpriteRenderer sprite;
+    [SerializeField] AudioSource audio;
     [SerializeField] DialogueObject[] dialogueObject;
 
     [SerializeField] int objectIndex = 0;
@@ -17,8 +18,10 @@ public class DialogueManager : MonoBehaviour, IInteractable
     [SerializeField] bool isLastText = false;
 
 
-    public UnityEvent DialogueStart;
-    public UnityEvent EndOfDialogues;
+    public UnityEvent OnDialogueStart;
+    public UnityEvent OnLineStart;
+    public UnityEvent OnLastLine;
+    public UnityEvent OnEndOfDialogues;
 
     private void Awake() 
     {
@@ -28,9 +31,13 @@ public class DialogueManager : MonoBehaviour, IInteractable
     private void NextDialogue() 
     {
         TypeDialogue(dialogueObject[objectIndex], typingSpeed);
-        DialogueStart.Invoke();
+        OnLineStart.Invoke();
 
+        if(dialogueObject[objectIndex].Expression != null)
         sprite.sprite = dialogueObject[objectIndex].Expression;
+
+        if(dialogueObject[objectIndex].Sound != null)
+        audio.clip = dialogueObject[objectIndex].Sound;
     }
 
     private void TypeDialogue(DialogueObject dialogueObject, float typingSpeed)
@@ -50,6 +57,7 @@ public class DialogueManager : MonoBehaviour, IInteractable
             if(isFirstText)
             {
                 isFirstText = false;
+                OnDialogueStart.Invoke();
                 NextDialogue();
                 return;
             }     
@@ -57,16 +65,22 @@ public class DialogueManager : MonoBehaviour, IInteractable
             {
                 return;
             }
-
+            
             if(sentenceIndex < dialogueObject[objectIndex].Sentence.Length - 1)
             {
                 sentenceIndex += 1;
                 NextDialogue();
+
+                //Last Line of the dialogue
+                if(objectIndex == dialogueObject.Length-1 && sentenceIndex == dialogueObject[objectIndex].Sentence.Length-1)
+                {OnLastLine.Invoke();}
+
                 return;
             }
             else
             {
                 sentenceIndex = 0;
+
                 if(objectIndex < dialogueObject.Length -1)
                 {
                     objectIndex += 1;
@@ -76,8 +90,7 @@ public class DialogueManager : MonoBehaviour, IInteractable
                 else
                 {
                     isLastText = true;
-                    EndOfDialogues.Invoke();
-                    Debug.Log("ACABOU O DIALOGO");
+                    OnEndOfDialogues.Invoke();
                 }
                 }
             }

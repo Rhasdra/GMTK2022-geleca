@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd7510854b5476e4c8b3d975e02a5b76, type: 3}
+  m_Name: 000_Outside
+  m_EditorClassIdentifier: 
+  sentence:
+  - 
+  - Great, another abandoned mansion. My client bought this old casino and nobody
+    wants to get near it to work on repairs because of the *noises*.
+  - "I hope this time it\u2019s a real ghost and not some weird teens roleplaying
+    in private property. \r"
+  - "My name is Dice T and I unhaunt houses, buildings, anything abandoned, that\u2019s
+    my job and I hope I can finish this fast. Nobody deserves to negotiate with ghosts
+    on a Friday night\u2026"
+  - 
+  sprite: {fileID: 0}

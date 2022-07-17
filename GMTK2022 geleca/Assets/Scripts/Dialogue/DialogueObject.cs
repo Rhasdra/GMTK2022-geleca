@@ -8,4 +8,7 @@ public class DialogueObject : ScriptableObject
 
     [SerializeField] private Sprite sprite;
     public Sprite Expression => sprite;
+
+    [SerializeField] private AudioClip sound;
+    public AudioClip Sound => sound;
 }
